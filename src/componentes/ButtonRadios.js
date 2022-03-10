@@ -3,15 +3,27 @@
 // Rafael de Alvarenga Reis, Angelica Diniz, Alexsandro Pinheiro Ferreira.
 
 import React, { Component } from 'react';
+import PropTypes from 'prop-types';
 
-class ButtonRadio extends Component {
+class ButtonRadios extends Component {
   render() {
+    const { id, name } = this.props;
     return (
       <div>
-        <button />
+        <form>
+          <label htmlFor={ id }>
+            <input type="radio" data-testid="category" name={ name } id={ id } />
+            {name}
+          </label>
+        </form>
       </div>
     );
   }
 }
 
-export default ButtonRadio;
+ButtonRadios.propTypes = {
+  name: PropTypes.string.isRequired,
+  id: PropTypes.string.isRequired,
+};
+
+export default ButtonRadios;
