@@ -1,27 +1,9 @@
 .App {
   display: flex;
-  flex-direction: column;
-  text-align: center;
-}
-
-main {
-  display: flex;
-}
-
-.searchClass {
-  display: flex;
 }
 
 .textInput {
   border: solid black;
-}
-
-header {
-  background-color: rgb(21, 32, 43);
-  color: #cacaca;
-  display: flex;
-  justify-content: space-between;
-  padding: 20px;
 }
 
 aside {

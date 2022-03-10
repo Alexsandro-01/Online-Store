@@ -33,29 +33,27 @@ class App extends React.Component {
     return (
       <div className="App">
         <BrowserRouter>
-          <header>
+          <aside>
+            {categorias.map((categoria) => (
+              <ButtonRadios
+                key={ categoria.id }
+                id={ categoria.id }
+                name={ categoria.name }
+              />
+            ))}
+          </aside>
+          <section>
             <h1>Grupo 24</h1>
             <button id="button-cart" type="button">
               <Link to="/carrinho" data-testid="shopping-cart-button">
                 carrinho de compras
               </Link>
             </button>
-          </header>
-          <main>
-            <aside>
-              {categorias.map((categoria) => (
-                <ButtonRadios
-                  key={ categoria.id }
-                  id={ categoria.id }
-                  name={ categoria.name }
-                />
-              ))}
-            </aside>
             <Switch>
               <Route exact path="/" component={ Search } />
               <Route path="/carrinho" component={ Cart } />
             </Switch>
-          </main>
+          </section>
         </BrowserRouter>
       </div>
     );
