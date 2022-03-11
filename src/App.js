@@ -17,6 +17,7 @@ class App extends React.Component {
     this.state = {
       categorias: [],
       resultSearch: [],
+      categorieToSearch: '',
     };
   }
 
@@ -30,10 +31,17 @@ class App extends React.Component {
     });
   };
 
-  searchQuery = async (query) => {
-    const obj = await getProductsFromCategoryAndQuery(false, query);
+  searchQuery = async (categoreID, query) => {
+    const { categorieToSearch } = this.state;
+    let obj;
+    if (categorieToSearch && !categoreID) {
+      obj = await getProductsFromCategoryAndQuery(categorieToSearch, query);
+    } else {
+      obj = await getProductsFromCategoryAndQuery(categoreID, query);
+    }
     this.setState({
       resultSearch: obj.results,
+      categorieToSearch: categoreID,
     });
   }
 
@@ -48,6 +56,7 @@ class App extends React.Component {
                 key={ categoria.id }
                 id={ categoria.id }
                 name={ categoria.name }
+                funSearchQuery={ this.searchQuery }
               />
             ))}
           </aside>
