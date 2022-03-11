@@ -8,13 +8,15 @@ import { BrowserRouter, Route, Switch, Link } from 'react-router-dom';
 import Search from './pages/Search';
 import Cart from './pages/Cart';
 import ButtonRadios from './componentes/ButtonRadios';
-import { getCategories } from './services/api';
+import { getCategories, getProductsFromCategoryAndQuery } from './services/api';
+import CardProduct from './componentes/CardProduct';
 
 class App extends React.Component {
   constructor() {
     super();
     this.state = {
       categorias: [],
+      resultSearch: [],
     };
   }
 
@@ -28,8 +30,15 @@ class App extends React.Component {
     });
   };
 
+  searchQuery = async (query) => {
+    const obj = await getProductsFromCategoryAndQuery(false, query);
+    this.setState({
+      resultSearch: obj.results,
+    });
+  }
+
   render() {
-    const { categorias } = this.state;
+    const { categorias, resultSearch } = this.state;
     return (
       <div className="App">
         <BrowserRouter>
@@ -50,9 +59,21 @@ class App extends React.Component {
               </Link>
             </button>
             <Switch>
-              <Route exact path="/" component={ Search } />
+              <Route
+                exact
+                path="/"
+                render={
+                  () => <Search funSearchQuery={ this.searchQuery } />
+                }
+              />
               <Route path="/carrinho" component={ Cart } />
             </Switch>
+            <section>
+              {
+                resultSearch
+                  .map((value) => <CardProduct key={ value.id } produto={ value } />)
+              }
+            </section>
           </section>
         </BrowserRouter>
       </div>
