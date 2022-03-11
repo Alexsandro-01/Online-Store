@@ -7,11 +7,17 @@ import PropTypes from 'prop-types';
 
 class ButtonRadios extends Component {
   render() {
-    const { id, name } = this.props;
+    const { id, name, funSearchQuery } = this.props;
     return (
       <div>
         <label htmlFor={ id }>
-          <input type="radio" data-testid="category" name="categorias" id={ id } />
+          <input
+            type="radio"
+            data-testid="category"
+            name="categorias"
+            id={ id }
+            onChange={ () => funSearchQuery(id, false) }
+          />
           {name}
         </label>
       </div>
@@ -22,6 +28,7 @@ class ButtonRadios extends Component {
 ButtonRadios.propTypes = {
   name: PropTypes.string.isRequired,
   id: PropTypes.string.isRequired,
+  funSearchQuery: PropTypes.func.isRequired,
 };
 
 export default ButtonRadios;

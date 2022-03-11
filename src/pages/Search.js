@@ -36,7 +36,7 @@ class Search extends Component {
         <button
           type="button"
           data-testid="query-button"
-          onClick={ () => { funSearchQuery(query); } }
+          onClick={ () => { funSearchQuery(false, query); } }
         >
           Buscar
         </button>
