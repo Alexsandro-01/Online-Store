@@ -10,6 +10,7 @@ import Cart from './pages/Cart';
 import ButtonRadios from './componentes/ButtonRadios';
 import { getCategories, getProductsFromCategoryAndQuery } from './services/api';
 import CardProduct from './componentes/CardProduct';
+import ProductDetail from './componentes/ProductDetail';
 
 class App extends React.Component {
   constructor() {
@@ -76,6 +77,12 @@ class App extends React.Component {
                 }
               />
               <Route path="/carrinho" component={ Cart } />
+              <Route
+                path="/product-detail/:id"
+                render={
+                  (props) => <ProductDetail { ...props } products={ resultSearch } />
+                }
+              />
             </Switch>
             <section>
               {
