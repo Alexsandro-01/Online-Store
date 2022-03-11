@@ -10,12 +10,10 @@ class ButtonRadios extends Component {
     const { id, name } = this.props;
     return (
       <div>
-        <form>
-          <label htmlFor={ id }>
-            <input type="radio" data-testid="category" name={ name } id={ id } />
-            {name}
-          </label>
-        </form>
+        <label htmlFor={ id }>
+          <input type="radio" data-testid="category" name="categorias" id={ id } />
+          {name}
+        </label>
       </div>
     );
   }
