@@ -42,6 +42,22 @@ class App extends React.Component {
     }
   };
 
+  funcRemoveItem = (produto) => {
+    const { id } = produto;
+    const { itensCarrinho } = this.state;
+    if (itensCarrinho[id].length > 1) {
+      itensCarrinho[id].shift(produto);
+      // this.setState({
+      //   itensCarrinho,
+      // });
+    } else {
+      delete itensCarrinho[id];
+    }
+    this.setState({
+      itensCarrinho,
+    });
+  };
+
   categories = async () => {
     this.setState({
       categorias: await getCategories(),
@@ -94,7 +110,13 @@ class App extends React.Component {
               />
               <Route
                 path="/carrinho"
-                render={ () => <Cart itensCarrinho={ itensCarrinho } /> }
+                render={ () => (
+                  <Cart
+                    itensCarrinho={ itensCarrinho }
+                    funcAddItem={ this.funcAddItem }
+                    funcRemoveItem={ this.funcRemoveItem }
+                  />
+                ) }
               />
               <Route
                 path="/lista-produtos"
