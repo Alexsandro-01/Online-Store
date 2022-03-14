@@ -8,21 +8,27 @@ class Cart extends Component {
     // let arrayItens;
     // if (itensCarrinho) {
     // }
-    console.log(arrayItens);
+    // console.log(arrayItens);
     return (
       <div className="page-cart">
         <h2>Carrinho de Compras</h2>
-        {arrayItens.map((index) => (
-          <div key={ index[0].id }>
-            <p data-testid="shopping-cart-product-name">{index[0].title}</p>
-            <img src={ index[0].thumbnail } alt={ index[0].title } />
-            <p data-testid="shopping-cart-product-quantity">
-              Quantidade:
-              {' '}
-              {index.length}
-            </p>
-          </div>
-        ))}
+        {arrayItens.length > 0 ? (
+          arrayItens.map((index) => (
+            <div key={ index[0].id }>
+              <p data-testid="shopping-cart-product-name">{index[0].title}</p>
+              <img src={ index[0].thumbnail } alt={ index[0].title } />
+              <p data-testid="shopping-cart-product-quantity">
+                Quantidade:
+                {' '}
+                {index.length}
+              </p>
+            </div>
+          ))
+        ) : (
+          <h2 data-testid="shopping-cart-empty-message">
+            Seu carrinho está vazio
+          </h2>
+        )}
       </div>
     );
   }

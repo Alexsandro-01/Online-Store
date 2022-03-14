@@ -109,7 +109,11 @@ class App extends React.Component {
               <Route
                 path="/product-detail/:id"
                 render={ (props) => (
-                  <ProductDetail { ...props } products={ resultSearch } />
+                  <ProductDetail
+                    { ...props }
+                    products={ resultSearch }
+                    funcAddItem={ this.funcAddItem }
+                  />
                 ) }
               />
             </Switch>

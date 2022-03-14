@@ -29,6 +29,7 @@ class ProductDetail extends React.Component {
 
   render() {
     const { product } = this.state;
+    const { funcAddItem } = this.props;
     return (
       <div>
         <h2>Especificações Técnicas</h2>
@@ -56,6 +57,17 @@ class ProductDetail extends React.Component {
               ))}
           </li>
         </ul>
+        <div>
+          <button
+            type="button"
+            data-testid="product-detail-add-to-cart"
+            onClick={ () => {
+              funcAddItem(product);
+            } }
+          >
+            Adicionar ao Carrinho
+          </button>
+        </div>
       </div>
     );
   }
@@ -63,5 +75,6 @@ class ProductDetail extends React.Component {
 ProductDetail.propTypes = {
   products: PropTypes.instanceOf(Array).isRequired,
   match: PropTypes.instanceOf(Object).isRequired,
+  funcAddItem: PropTypes.func.isRequired,
 };
 export default ProductDetail;
