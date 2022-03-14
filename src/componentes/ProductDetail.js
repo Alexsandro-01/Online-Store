@@ -14,13 +14,18 @@ class ProductDetail extends React.Component {
   }
 
   findProducts = () => {
-    const { products, match: { params: { id } } } = this.props;
+    const {
+      products,
+      match: {
+        params: { id },
+      },
+    } = this.props;
     const reform = id.trim();
     const produto = products.find((value) => value.id === reform);
     this.setState({
       product: produto,
     });
-  }
+  };
 
   render() {
     const { product } = this.state;
@@ -31,26 +36,24 @@ class ProductDetail extends React.Component {
         <ul>
           <li data-testid="product-detail-name">
             Nome:
-            { product.title }
+            {product.title}
           </li>
           <li>
             Valor:
-            { product.price }
+            {product.price}
           </li>
 
           <li>
             Atributos:
-            {
-              product.attributes
+            {product.attributes
               && product.attributes.map((atribute) => (
                 <p key={ atribute.id }>
                   {atribute.name}
                   :
-                  { ' ' }
+                  {' '}
                   {atribute.value_name}
                 </p>
-              ))
-            }
+              ))}
           </li>
         </ul>
       </div>
@@ -60,6 +63,5 @@ class ProductDetail extends React.Component {
 ProductDetail.propTypes = {
   products: PropTypes.instanceOf(Array).isRequired,
   match: PropTypes.instanceOf(Object).isRequired,
-
 };
 export default ProductDetail;

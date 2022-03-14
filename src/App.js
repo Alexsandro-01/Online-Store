@@ -4,12 +4,12 @@
 
 import React from 'react';
 import './App.css';
-import { BrowserRouter, Route, Switch, Link } from 'react-router-dom';
+import { BrowserRouter, Route, Switch, Link, Redirect } from 'react-router-dom';
 import Search from './pages/Search';
 import Cart from './pages/Cart';
 import ButtonRadios from './componentes/ButtonRadios';
 import { getCategories, getProductsFromCategoryAndQuery } from './services/api';
-import CardProduct from './componentes/CardProduct';
+import ProdutoLista from './pages/ProdutoLista';
 import ProductDetail from './componentes/ProductDetail';
 
 class App extends React.Component {
@@ -19,12 +19,28 @@ class App extends React.Component {
       categorias: [],
       resultSearch: [],
       categorieToSearch: '',
+      itensCarrinho: {},
     };
   }
 
   componentDidMount() {
     this.categories();
   }
+
+  funcAddItem = (produto) => {
+    const { id } = produto;
+    const { itensCarrinho } = this.state;
+    if (itensCarrinho[id]) {
+      itensCarrinho[id].push(produto);
+      this.setState({
+        itensCarrinho,
+      });
+    } else {
+      this.setState((prevState) => ({
+        itensCarrinho: { ...prevState.itensCarrinho, [id]: [produto] },
+      }));
+    }
+  };
 
   categories = async () => {
     this.setState({
@@ -44,10 +60,11 @@ class App extends React.Component {
       resultSearch: obj.results,
       categorieToSearch: categoreID,
     });
-  }
+  };
 
   render() {
-    const { categorias, resultSearch } = this.state;
+    const { categorias, resultSearch, itensCarrinho } = this.state;
+    // console.log(itensCarrinho);
     return (
       <div className="App">
         <BrowserRouter>
@@ -68,28 +85,34 @@ class App extends React.Component {
                 carrinho de compras
               </Link>
             </button>
+            {resultSearch.length > 0 && <Redirect to="lista-produtos" />}
             <Switch>
               <Route
                 exact
                 path="/"
-                render={
-                  () => <Search funSearchQuery={ this.searchQuery } />
-                }
+                render={ () => <Search funSearchQuery={ this.searchQuery } /> }
               />
-              <Route path="/carrinho" component={ Cart } />
+              <Route
+                path="/carrinho"
+                render={ () => <Cart itensCarrinho={ itensCarrinho } /> }
+              />
+              <Route
+                path="/lista-produtos"
+                render={ (props) => (
+                  <ProdutoLista
+                    { ...props }
+                    resultSearch={ resultSearch }
+                    funcAddItem={ this.funcAddItem }
+                  />
+                ) }
+              />
               <Route
                 path="/product-detail/:id"
-                render={
-                  (props) => <ProductDetail { ...props } products={ resultSearch } />
-                }
+                render={ (props) => (
+                  <ProductDetail { ...props } products={ resultSearch } />
+                ) }
               />
             </Switch>
-            <section>
-              {
-                resultSearch
-                  .map((value) => <CardProduct key={ value.id } produto={ value } />)
-              }
-            </section>
           </section>
         </BrowserRouter>
       </div>
