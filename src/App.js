@@ -11,6 +11,7 @@ import ButtonRadios from './componentes/ButtonRadios';
 import { getCategories, getProductsFromCategoryAndQuery } from './services/api';
 import ProdutoLista from './pages/ProdutoLista';
 import ProductDetail from './componentes/ProductDetail';
+import FinalizarCompras from './pages/FinalizarCompras';
 
 class App extends React.Component {
   constructor() {
@@ -107,6 +108,12 @@ class App extends React.Component {
                 exact
                 path="/"
                 render={ () => <Search funSearchQuery={ this.searchQuery } /> }
+              />
+              <Route
+                path="/finalizar-compra"
+                render={ (props) => (
+                  <FinalizarCompras { ...props } itensCarrinho={ itensCarrinho } />
+                ) }
               />
               <Route
                 path="/carrinho"
