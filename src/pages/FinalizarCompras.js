@@ -6,6 +6,7 @@ class FinalizarCompras extends Component {
     // const { itensCarrinho } = this.props;
     return (
       <section>
+        <h2>Finalizar Compra</h2>
         <label htmlFor="fullNameInput">
           Nome completo
           <input
