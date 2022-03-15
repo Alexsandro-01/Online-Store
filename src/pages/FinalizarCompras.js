@@ -1,11 +1,12 @@
 import React, { Component } from 'react';
-import PropTypes from 'prop-types';
+// import PropTypes from 'prop-types';
 
 class FinalizarCompras extends Component {
   render() {
-    const { itensCarrinho } = this.props;
+    // const { itensCarrinho } = this.props;
     return (
       <section>
+        <h2>Finalizar Compra</h2>
         <label htmlFor="fullNameInput">
           Nome completo
           <input
@@ -65,8 +66,8 @@ class FinalizarCompras extends Component {
   }
 }
 
-FinalizarCompras.propTypes = {
-  itensCarrinho: PropTypes.instanceOf(Object).isRequired,
-};
+// FinalizarCompras.propTypes = {
+//   itensCarrinho: PropTypes.instanceOf(Object).isRequired,
+// };
 
 export default FinalizarCompras;
