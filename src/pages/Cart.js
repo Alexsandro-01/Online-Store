@@ -27,10 +27,6 @@ class Cart extends Component {
     });
   };
 
-  // limitAddProductToCart = (quantToCart, availableQuanty) => {
-
-  // }
-
   render() {
     const { itensCarrinho, funcAddItem, funcRemoveItem } = this.props;
     const { sumValue } = this.state;

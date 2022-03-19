@@ -108,9 +108,18 @@ class ProductDetail extends React.Component {
             {product.title}
           </li>
           <li>
-            Valor:
+            R$
+            {' '}
             {product.price}
           </li>
+          {
+            product.shipping && product.shipping.free_shipping
+              && (
+                <li data-testid="free-shipping">
+                  Frete Grátis
+                </li>
+              )
+          }
 
           <li>
             Atributos:
@@ -203,7 +212,7 @@ class ProductDetail extends React.Component {
         <div>
           {avaliacoes[product.id] ? (
             avaliacoes[product.id].map((avali) => (
-              <div key={ avali.id }>
+              <div key={ avali.email }>
                 <p>
                   <span>{avali.email}</span>
                   <span>{avali.nota}</span>

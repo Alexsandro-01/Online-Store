@@ -16,7 +16,19 @@ class CardProduct extends Component {
           </Link>
         </p>
         <img src={ produto.thumbnail } alt={ produto.title } />
-        <p>{produto.price}</p>
+        <p>
+          R$
+          {' '}
+          {produto.price}
+        </p>
+        {
+          produto.shipping.free_shipping
+            && (
+              <p data-testid="free-shipping">
+                Frete Grátis
+              </p>
+            )
+        }
         <button
           type="button"
           data-testid="product-add-to-cart"
@@ -37,6 +49,7 @@ CardProduct.propTypes = {
     thumbnail: PropTypes.string,
     price: PropTypes.number,
     id: PropTypes.string,
+    shipping: PropTypes.instanceOf(Object).isRequired,
   }).isRequired,
   funcAddItem: PropTypes.func.isRequired,
 };
