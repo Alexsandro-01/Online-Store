@@ -27,6 +27,10 @@ class Cart extends Component {
     });
   };
 
+  // limitAddProductToCart = (quantToCart, availableQuanty) => {
+
+  // }
+
   render() {
     const { itensCarrinho, funcAddItem, funcRemoveItem } = this.props;
     const { sumValue } = this.state;
@@ -34,50 +38,53 @@ class Cart extends Component {
     return (
       <div className="page-cart">
         <h2>Carrinho de Compras</h2>
-        {arrayItens.length > 0 ? (
-          arrayItens.map((index) => (
-            <div key={ index[0].id }>
-              <p data-testid="shopping-cart-product-name">{index[0].title}</p>
-              <img src={ index[0].thumbnail } alt={ index[0].title } />
-              <p>
-                R$:
-                {' '}
-                {index[0].price}
-              </p>
-              <div>
-                <button
-                  type="button"
-                  data-testid="product-decrease-quantity"
-                  onClick={ () => {
-                    funcRemoveItem(index[0]);
-                    this.sumValueTotal();
-                  } }
-                >
-                  -
-                </button>
-                <p data-testid="shopping-cart-product-quantity">
-                  Quantidade:
+        {
+          arrayItens.length > 0 ? (
+            arrayItens.map((index) => (
+              <div key={ index[0].id }>
+                <p data-testid="shopping-cart-product-name">{index[0].title}</p>
+                <img src={ index[0].thumbnail } alt={ index[0].title } />
+                <p>
+                  R$:
                   {' '}
-                  {index.length}
+                  {index[0].price}
                 </p>
-                <button
-                  type="button"
-                  data-testid="product-increase-quantity"
-                  onClick={ () => {
-                    funcAddItem(index[0]);
-                    this.sumValueTotal();
-                  } }
-                >
-                  +
-                </button>
+                <div>
+                  <button
+                    type="button"
+                    data-testid="product-decrease-quantity"
+                    onClick={ () => {
+                      funcRemoveItem(index[0]);
+                      this.sumValueTotal();
+                    } }
+                  >
+                    -
+                  </button>
+                  <p data-testid="shopping-cart-product-quantity">
+                    Quantidade:
+                    {' '}
+                    {index.length}
+                  </p>
+                  <button
+                    type="button"
+                    data-testid="product-increase-quantity"
+                    disabled={ index.length >= index[0].available_quantity }
+                    onClick={ () => {
+                      funcAddItem(index[0]);
+                      this.sumValueTotal();
+                    } }
+                  >
+                    +
+                  </button>
+                </div>
               </div>
-            </div>
-          ))
-        ) : (
-          <h2 data-testid="shopping-cart-empty-message">
-            Seu carrinho está vazio
-          </h2>
-        )}
+            ))
+          ) : (
+            <h2 data-testid="shopping-cart-empty-message">
+              Seu carrinho está vazio
+            </h2>
+          )
+        }
 
         <p>
           Total:
