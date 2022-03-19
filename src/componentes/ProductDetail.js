@@ -41,11 +41,9 @@ class ProductDetail extends React.Component {
     this.setState({
       product: response,
     });
-    console.log();
   };
 
   addAvaliacao = (aval, id) => {
-    // console.log(id);
     const avaliacoesJson = localStorage.getItem('avaliacao');
     const avaliacoesObj = JSON.parse(avaliacoesJson);
 
@@ -60,7 +58,6 @@ class ProductDetail extends React.Component {
 
   avaliacao = () => {
     const { product } = this.state;
-    // console.log(product.id);
     const email = document.getElementById('emailInput');
     const comentario = document.getElementById('comentario');
     const notas = document.querySelectorAll('input[name=nota]');
@@ -70,7 +67,6 @@ class ProductDetail extends React.Component {
         notaUsuario = nota;
       }
     });
-    // console.log(email);
     if (email.value === '') {
       email.style.border = 'solid 2px red';
     } else if (!notaUsuario.id) {

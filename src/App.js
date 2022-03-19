@@ -21,43 +21,81 @@ class App extends React.Component {
       resultSearch: [],
       categorieToSearch: '',
       itensCarrinho: {},
+      quantItemsToCart: 0,
     };
   }
 
   componentDidMount() {
+    const carrinhoJSON = localStorage.getItem('carrinho');
+    if (carrinhoJSON) {
+      const itensCarrinho = JSON.parse(carrinhoJSON);
+      this.setState({
+        itensCarrinho,
+      });
+    }
     this.categories();
+    this.countItemsToCart();
   }
 
   funcAddItem = (produto) => {
     const { id } = produto;
-    const { itensCarrinho } = this.state;
-    if (itensCarrinho[id]) {
-      itensCarrinho[id].push(produto);
-      this.setState({
-        itensCarrinho,
-      });
+    const carrinhoJSON = localStorage.getItem('carrinho');
+    if (carrinhoJSON) {
+      const itensCarrinho = JSON.parse(carrinhoJSON);
+      if (itensCarrinho[id]) {
+        itensCarrinho[id].push(produto);
+        localStorage.setItem('carrinho', JSON.stringify(itensCarrinho));
+        this.setState({
+          itensCarrinho,
+        });
+      } else {
+        localStorage
+          .setItem('carrinho', JSON.stringify({ ...itensCarrinho, [id]: [produto] }));
+        this.setState((prevState) => ({
+          itensCarrinho: { ...prevState.itensCarrinho, [id]: [produto] },
+        }));
+      }
     } else {
-      this.setState((prevState) => ({
-        itensCarrinho: { ...prevState.itensCarrinho, [id]: [produto] },
-      }));
+      localStorage.setItem('carrinho', JSON.stringify({ [id]: [produto] }));
+      this.setState({
+        itensCarrinho: { [id]: [produto] },
+      });
     }
+    this.countItemsToCart();
   };
 
   funcRemoveItem = (produto) => {
     const { id } = produto;
-    const { itensCarrinho } = this.state;
+    // const { itensCarrinho } = this.state;
+    const carrinhoJSON = localStorage.getItem('carrinho');
+    const itensCarrinho = JSON.parse(carrinhoJSON);
     if (itensCarrinho[id].length > 1) {
       itensCarrinho[id].shift(produto);
-      // this.setState({
-      //   itensCarrinho,
-      // });
     } else {
       delete itensCarrinho[id];
     }
+    localStorage.setItem('carrinho', JSON.stringify(itensCarrinho));
     this.setState({
       itensCarrinho,
     });
+    this.countItemsToCart();
   };
+
+  countItemsToCart = () => {
+    let count = 0;
+    const itensCarrinhoJSON = localStorage.getItem('carrinho');
+    if (itensCarrinhoJSON) {
+      const itensCarrinho = JSON.parse(itensCarrinhoJSON);
+      const itensCarrinhoArray = Object.values(itensCarrinho);
+      // console.log(itensCarrinhoArray);
+      itensCarrinhoArray.forEach((produto) => {
+        count += produto.length;
+      });
+      this.setState({
+        quantItemsToCart: count,
+      });
+    }
+  }
 
   categories = async () => {
     this.setState({
@@ -80,8 +118,7 @@ class App extends React.Component {
   };
 
   render() {
-    const { categorias, resultSearch, itensCarrinho } = this.state;
-    // console.log(itensCarrinho);
+    const { categorias, resultSearch, itensCarrinho, quantItemsToCart } = this.state;
     return (
       <div className="App">
         <BrowserRouter>
@@ -101,6 +138,11 @@ class App extends React.Component {
               <Link to="/carrinho" data-testid="shopping-cart-button">
                 carrinho de compras
               </Link>
+              <span data-testid="shopping-cart-size">
+                {
+                  quantItemsToCart
+                }
+              </span>
             </button>
             {resultSearch.length > 0 && <Redirect to="lista-produtos" />}
             <Switch>
