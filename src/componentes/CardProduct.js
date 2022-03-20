@@ -1,12 +1,33 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom';
+import { IoIosCube } from 'react-icons/io';
+import '../styles/cardProduct.css';
 
 class CardProduct extends Component {
   render() {
     const { produto, funcAddItem } = this.props;
     return (
-      <div data-testid="product">
+      <div data-testid="product" className="card-product">
+        <div>
+          <img src={ produto.thumbnail } alt={ produto.title } />
+        </div>
+        <p className="price">
+          R$
+          {' '}
+          {produto.price.toFixed(2)}
+        </p>
+        {
+          produto.shipping.free_shipping
+            && (
+              <p data-testid="free-shipping" className="frete">
+                Frete Grátis
+                <span>
+                  <IoIosCube />
+                </span>
+              </p>
+            )
+        }
         <p>
           <Link
             data-testid="product-detail-link"
@@ -15,20 +36,6 @@ class CardProduct extends Component {
             {produto.title}
           </Link>
         </p>
-        <img src={ produto.thumbnail } alt={ produto.title } />
-        <p>
-          R$
-          {' '}
-          {produto.price}
-        </p>
-        {
-          produto.shipping.free_shipping
-            && (
-              <p data-testid="free-shipping">
-                Frete Grátis
-              </p>
-            )
-        }
         <button
           type="button"
           data-testid="product-add-to-cart"

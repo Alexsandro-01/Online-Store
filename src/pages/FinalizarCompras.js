@@ -1,11 +1,12 @@
 import React, { Component } from 'react';
+import '../styles/finalizarCompra.css';
 // import PropTypes from 'prop-types';
 
 class FinalizarCompras extends Component {
   render() {
     // const { itensCarrinho } = this.props;
     return (
-      <section>
+      <section className="finalizar-compra">
         <h2>Finalizar Compra</h2>
         <label htmlFor="fullNameInput">
           Nome completo

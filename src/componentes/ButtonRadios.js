@@ -4,12 +4,13 @@
 
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
+import '../styles/buttonRadios.css';
 
 class ButtonRadios extends Component {
   render() {
     const { id, name, funSearchQuery } = this.props;
     return (
-      <div>
+      <div className="category">
         <label htmlFor={ id }>
           <input
             type="radio"
@@ -20,6 +21,7 @@ class ButtonRadios extends Component {
           />
           {name}
         </label>
+        {/* <hr /> */}
       </div>
     );
   }

@@ -1,0 +1,21 @@
+.product-detail {
+  flex-basis: 0;
+  flex-grow: 4;
+}
+
+.product-detail .img-container {
+  align-items: center;
+  background-color: white;
+  display: flex;
+  height: 280px;
+  justify-content: center;
+  width: 280px;
+}
+
+.product-detail .img-container img {
+  width: 150px;
+}
+
+.product-detail p {
+  padding: 10px 0;
+}

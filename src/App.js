@@ -4,7 +4,7 @@
 
 import React from 'react';
 import './App.css';
-import { BrowserRouter, Route, Switch, Link, Redirect } from 'react-router-dom';
+import { BrowserRouter, Route, Switch, Redirect } from 'react-router-dom';
 import Search from './pages/Search';
 import Cart from './pages/Cart';
 import ButtonRadios from './componentes/ButtonRadios';
@@ -12,6 +12,7 @@ import { getCategories, getProductsFromCategoryAndQuery } from './services/api';
 import ProdutoLista from './pages/ProdutoLista';
 import ProductDetail from './componentes/ProductDetail';
 import FinalizarCompras from './pages/FinalizarCompras';
+import Header from './componentes/Header';
 
 class App extends React.Component {
   constructor() {
@@ -122,28 +123,18 @@ class App extends React.Component {
     return (
       <div className="App">
         <BrowserRouter>
-          <aside>
-            {categorias.map((categoria) => (
-              <ButtonRadios
-                key={ categoria.id }
-                id={ categoria.id }
-                name={ categoria.name }
-                funSearchQuery={ this.searchQuery }
-              />
-            ))}
-          </aside>
-          <section>
-            <h1>Grupo 24</h1>
-            <button id="button-cart" type="button">
-              <Link to="/carrinho" data-testid="shopping-cart-button">
-                carrinho de compras
-              </Link>
-              <span data-testid="shopping-cart-size">
-                {
-                  quantItemsToCart
-                }
-              </span>
-            </button>
+          <Header quantItemsToCart={ quantItemsToCart } />
+          <main>
+            <aside>
+              {categorias.map((categoria) => (
+                <ButtonRadios
+                  key={ categoria.id }
+                  id={ categoria.id }
+                  name={ categoria.name }
+                  funSearchQuery={ this.searchQuery }
+                />
+              ))}
+            </aside>
             {resultSearch.length > 0 && <Redirect to="lista-produtos" />}
             <Switch>
               <Route
@@ -188,7 +179,7 @@ class App extends React.Component {
                 ) }
               />
             </Switch>
-          </section>
+          </main>
         </BrowserRouter>
       </div>
     );

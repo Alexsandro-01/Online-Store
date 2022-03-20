@@ -4,6 +4,7 @@
 
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
+import '../styles/search.css';
 
 class Search extends Component {
   constructor() {
@@ -25,23 +26,27 @@ class Search extends Component {
     const { funSearchQuery } = this.props;
     return (
       <div className="searchClass">
-        <input
-          className="textInput"
-          type="text"
-          name="name"
-          value={ query }
-          onChange={ this.handleQuery }
-          data-testid="query-input"
-        />
-        <button
-          type="button"
-          data-testid="query-button"
-          onClick={ () => { funSearchQuery(false, query); } }
-        >
-          Buscar
-        </button>
+        <div>
+          <input
+            className="textInput"
+            type="text"
+            name="name"
+            value={ query }
+            onChange={ this.handleQuery }
+            data-testid="query-input"
+          />
+          <button
+            type="button"
+            data-testid="query-button"
+            onClick={ () => { funSearchQuery(false, query); } }
+          >
+            Buscar
+          </button>
+        </div>
         <p data-testid="home-initial-message">
-          Digite algum termo de pesquisa ou escolha uma categoria.
+          <strong>
+            Digite algum termo de pesquisa ou escolha uma categoria.
+          </strong>
         </p>
       </div>
     );

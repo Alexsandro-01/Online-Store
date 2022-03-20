@@ -1,0 +1,21 @@
+header {
+  align-items: center;
+  background-color: #012438;
+  color: #fea418;
+  display: flex;
+  justify-content: space-around;
+  margin-bottom: 30px;
+  padding: 20px;
+}
+
+header a {
+  color: #fea418;
+  display: block;
+  font-size: 25px;
+  text-decoration: none;
+}
+
+header a span {
+  color: aqua;
+  font-size: medium;
+}

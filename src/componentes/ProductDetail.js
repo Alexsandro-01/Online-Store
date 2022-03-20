@@ -1,5 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import '../styles/productDetail.css';
 
 class ProductDetail extends React.Component {
   constructor() {
@@ -99,19 +100,20 @@ class ProductDetail extends React.Component {
     const { funcAddItem } = this.props;
     const avaliacoes = this.recuperarAvaliacao();
     return (
-      <div>
-        <h2>Especificações Técnicas</h2>
-        <img src={ product.thumbnail } alt={ product.title } />
+      <div className="product-detail">
+        <p data-testid="product-detail-name">
+          {product.title}
+        </p>
+        <p>
+          R$
+          {' '}
+          {product.price}
+        </p>
+        <div className="img-container">
+          <img src={ product.thumbnail } alt={ product.title } />
+        </div>
+        <h4>Especificações Técnicas</h4>
         <ul>
-          <li data-testid="product-detail-name">
-            Nome:
-            {product.title}
-          </li>
-          <li>
-            R$
-            {' '}
-            {product.price}
-          </li>
           {
             product.shipping && product.shipping.free_shipping
               && (
@@ -120,7 +122,6 @@ class ProductDetail extends React.Component {
                 </li>
               )
           }
-
           <li>
             Atributos:
             {product.attributes
