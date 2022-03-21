@@ -1,0 +1,9 @@
+.category {
+  border-bottom: 1px solid;
+  margin-right: 30px;
+  padding: 10px;
+}
+
+.category label {
+  cursor: pointer;
+}

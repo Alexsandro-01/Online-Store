@@ -1,0 +1,7 @@
+.produto-lista {
+  display: flex;
+  flex-basis: 0;
+  flex-grow: 4;
+  flex-wrap: wrap;
+  justify-content: center;
+}

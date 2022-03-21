@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom';
+import '../styles/cart.css';
 
 class Cart extends Component {
   constructor() {
@@ -16,15 +17,18 @@ class Cart extends Component {
   }
 
   sumValueTotal = () => {
-    const { itensCarrinho } = this.props;
-    const arrayItens = Object.values(itensCarrinho);
-    let valor = 0;
-    arrayItens.forEach((produto) => {
-      valor = Number(produto.length) * Number(produto[0].price);
-    });
-    this.setState({
-      sumValue: valor,
-    });
+    const carrinhoJson = localStorage.getItem('carrinho');
+    if (carrinhoJson) {
+      const itensCarrinho = JSON.parse(carrinhoJson);
+      const arrayItens = Object.values(itensCarrinho);
+      let valor = 0;
+      arrayItens.forEach((produto) => {
+        valor += Number(produto.length) * Number(produto[0].price);
+      });
+      this.setState({
+        sumValue: valor,
+      });
+    }
   };
 
   render() {
@@ -34,55 +38,66 @@ class Cart extends Component {
     return (
       <div className="page-cart">
         <h2>Carrinho de Compras</h2>
-        {arrayItens.length > 0 ? (
-          arrayItens.map((index) => (
-            <div key={ index[0].id }>
-              <p data-testid="shopping-cart-product-name">{index[0].title}</p>
-              <img src={ index[0].thumbnail } alt={ index[0].title } />
-              <p>
-                R$:
-                {' '}
-                {index[0].price}
-              </p>
-              <div>
-                <button
-                  type="button"
-                  data-testid="product-decrease-quantity"
-                  onClick={ () => {
-                    funcRemoveItem(index[0]);
-                    this.sumValueTotal();
-                  } }
-                >
-                  -
-                </button>
-                <p data-testid="shopping-cart-product-quantity">
-                  Quantidade:
-                  {' '}
-                  {index.length}
-                </p>
-                <button
-                  type="button"
-                  data-testid="product-increase-quantity"
-                  onClick={ () => {
-                    funcAddItem(index[0]);
-                    this.sumValueTotal();
-                  } }
-                >
-                  +
-                </button>
+        {
+          arrayItens.length > 0 ? (
+            arrayItens.map((index) => (
+              <div key={ index[0].id } className="card-cart-product">
+                <div className="cart-thumb">
+                  <img src={ index[0].thumbnail } alt={ index[0].title } />
+                </div>
+                <div className="cart-title">
+                  <p data-testid="shopping-cart-product-name">{index[0].title}</p>
+                </div>
+                <div className="cart-quant">
+                  <button
+                    type="button"
+                    data-testid="product-decrease-quantity"
+                    onClick={ () => {
+                      funcRemoveItem(index[0]);
+                      this.sumValueTotal();
+                    } }
+                  >
+                    -
+                  </button>
+                  <p data-testid="shopping-cart-product-quantity">
+                    {index.length}
+                  </p>
+                  <button
+                    type="button"
+                    data-testid="product-increase-quantity"
+                    disabled={ index.length >= index[0].available_quantity }
+                    onClick={ () => {
+                      funcAddItem(index[0]);
+                      this.sumValueTotal();
+                    } }
+                  >
+                    +
+                  </button>
+                </div>
+                <div className="cart-price">
+                  <p>
+                    R$
+                    {' '}
+                    {index[0].price.toFixed(2)}
+                  </p>
+                </div>
               </div>
-            </div>
-          ))
-        ) : (
-          <h2 data-testid="shopping-cart-empty-message">
-            Seu carrinho está vazio
-          </h2>
-        )}
+            ))
+          ) : (
+            <h2 data-testid="shopping-cart-empty-message">
+              Seu carrinho está vazio
+            </h2>
+          )
+        }
 
-        <p>
-          Total:
+        <p className="total-value">
+          <strong>
+            Valor total da compra:
+          </strong>
           {' '}
-          {sumValue}
+          R$
+          {' '}
+          {sumValue.toFixed(2)}
         </p>
 
         <br />

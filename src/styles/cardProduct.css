@@ -1,0 +1,45 @@
+.card-product {
+  background-color: white;
+  border-radius: 10px;
+  box-shadow: 0 0 5px rgb(184, 184, 184);
+  margin: 10px;
+  width: 280px;
+}
+
+.card-product div img {
+  max-height: 100%;
+  max-width: 50%;
+}
+
+.card-product div {
+  align-items: center;
+  border-bottom: 1px solid;
+  display: flex;
+  height: 200px;
+  justify-content: center;
+}
+
+.card-product p {
+  padding: 5px 10px;
+}
+
+.card-product button {
+  margin: 20px auto;
+}
+
+.card-product .price {
+  font-size: 1.5em;
+  font-weight: 700;
+}
+
+.card-product .frete {
+  color: rgb(7, 202, 0);
+}
+
+.card-product .frete span {
+  padding: 0 5px;
+}
+
+.card-product a {
+  text-decoration: none;
+}

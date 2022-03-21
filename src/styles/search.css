@@ -1,0 +1,24 @@
+.searchClass {
+  flex-basis: 0;
+  flex-grow: 4;
+}
+
+.searchClass div {
+  display: flex;
+  justify-content: center;
+  padding: 10px;
+}
+
+.searchClass input {
+  border: solid 1px;
+  border-radius: 5px;
+  font-size: 20px;
+  outline-color: #fea418;
+  padding: 5px;
+  width: 50%;
+}
+
+.searchClass p {
+  padding: 10px;
+  text-align: center;
+}

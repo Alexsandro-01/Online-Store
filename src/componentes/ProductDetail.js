@@ -1,5 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import '../styles/productDetail.css';
 
 class ProductDetail extends React.Component {
   constructor() {
@@ -41,11 +42,9 @@ class ProductDetail extends React.Component {
     this.setState({
       product: response,
     });
-    console.log();
   };
 
   addAvaliacao = (aval, id) => {
-    // console.log(id);
     const avaliacoesJson = localStorage.getItem('avaliacao');
     const avaliacoesObj = JSON.parse(avaliacoesJson);
 
@@ -60,7 +59,6 @@ class ProductDetail extends React.Component {
 
   avaliacao = () => {
     const { product } = this.state;
-    // console.log(product.id);
     const email = document.getElementById('emailInput');
     const comentario = document.getElementById('comentario');
     const notas = document.querySelectorAll('input[name=nota]');
@@ -70,7 +68,6 @@ class ProductDetail extends React.Component {
         notaUsuario = nota;
       }
     });
-    // console.log(email);
     if (email.value === '') {
       email.style.border = 'solid 2px red';
     } else if (!notaUsuario.id) {
@@ -103,19 +100,28 @@ class ProductDetail extends React.Component {
     const { funcAddItem } = this.props;
     const avaliacoes = this.recuperarAvaliacao();
     return (
-      <div>
-        <h2>Especificações Técnicas</h2>
-        <img src={ product.thumbnail } alt={ product.title } />
+      <div className="product-detail">
+        <p data-testid="product-detail-name">
+          {product.title}
+        </p>
+        <p>
+          R$
+          {' '}
+          {product.price}
+        </p>
+        <div className="img-container">
+          <img src={ product.thumbnail } alt={ product.title } />
+        </div>
+        <h4>Especificações Técnicas</h4>
         <ul>
-          <li data-testid="product-detail-name">
-            Nome:
-            {product.title}
-          </li>
-          <li>
-            Valor:
-            {product.price}
-          </li>
-
+          {
+            product.shipping && product.shipping.free_shipping
+              && (
+                <li data-testid="free-shipping">
+                  Frete Grátis
+                </li>
+              )
+          }
           <li>
             Atributos:
             {product.attributes
@@ -207,7 +213,7 @@ class ProductDetail extends React.Component {
         <div>
           {avaliacoes[product.id] ? (
             avaliacoes[product.id].map((avali) => (
-              <div key={ avali.id }>
+              <div key={ avali.email }>
                 <p>
                   <span>{avali.email}</span>
                   <span>{avali.nota}</span>
