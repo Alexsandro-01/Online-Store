@@ -10,58 +10,76 @@ class FinalizarCompras extends Component {
         <h2>Finalizar Compra</h2>
         <label htmlFor="fullNameInput">
           Nome completo
-          <input
-            data-testid="checkout-fullname"
-            type="text"
-            id="fullNameInput"
-            name="fullNameInput"
-          />
         </label>
+        <div>
+            <input
+              data-testid="checkout-fullname"
+              type="text"
+              id="fullNameInput"
+              name="fullNameInput"
+            />
+        </div>
         <label htmlFor="emailInput">
           Email
-          <input
-            data-testid="checkout-email"
-            type="text"
-            id="emailInput"
-            name="emailInput"
-          />
         </label>
+        <div>
+            <input
+              data-testid="checkout-email"
+              type="text"
+              id="emailInput"
+              name="emailInput"
+              />
+        </div>
         <label htmlFor="cpfInput">
           CPF
-          <input
-            data-testid="checkout-cpf"
-            type="text"
-            id="cpfInput"
-            name="cpfInput"
-          />
         </label>
+        <div>
+            <input
+              data-testid="checkout-cpf"
+              type="text"
+              id="cpfInput"
+              name="cpfInput"
+              />
+        </div>
         <label htmlFor="phoneInput">
           Telefone
-          <input
-            data-testid="checkout-phone"
-            type="text"
-            id="phoneInput"
-            name="phoneInput"
-          />
         </label>
+        <div>
+            <input
+              data-testid="checkout-phone"
+              type="text"
+              id="phoneInput"
+              name="phoneInput"
+            />
+        </div>
         <label htmlFor="cepInput">
           CEP
-          <input
-            data-testid="checkout-cep"
-            type="text"
-            id="cepInput"
-            name="cepInput"
-          />
         </label>
+        <div>
+            <input
+              data-testid="checkout-cep"
+              type="text"
+              id="cepInput"
+              name="cepInput"
+            />
+        </div>
         <label htmlFor="addressInput">
           Endereço
+        </label>
+        <div>
           <input
             data-testid="checkout-address"
             type="text"
             id="addressInput"
             name="addressInput"
           />
-        </label>
+        </div>
+
+        <div>
+          <button>
+            Finalizar
+          </button>
+        </div>
       </section>
     );
   }
