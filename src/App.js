@@ -4,7 +4,7 @@
 
 import React from 'react';
 import './App.css';
-import { BrowserRouter, Route, Switch, Redirect } from 'react-router-dom';
+import { BrowserRouter, Route, Switch, Redirect, HashRouter } from 'react-router-dom';
 import Search from './pages/Search';
 import Cart from './pages/Cart';
 import ButtonRadios from './componentes/ButtonRadios';
@@ -120,7 +120,7 @@ class App extends React.Component {
     const { categorias, resultSearch, itensCarrinho, quantItemsToCart } = this.state;
     return (
       <div className="App">
-        <BrowserRouter>
+        <HashRouter>
           <Header quantItemsToCart={ quantItemsToCart } />
           <main>
             <aside>
@@ -178,7 +178,7 @@ class App extends React.Component {
               />
             </Switch>
           </main>
-        </BrowserRouter>
+        </HashRouter>
       </div>
     );
   }
