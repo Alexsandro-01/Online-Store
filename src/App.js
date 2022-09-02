@@ -67,7 +67,6 @@ class App extends React.Component {
 
   funcRemoveItem = (produto) => {
     const { id } = produto;
-    // const { itensCarrinho } = this.state;
     const carrinhoJSON = localStorage.getItem('carrinho');
     const itensCarrinho = JSON.parse(carrinhoJSON);
     if (itensCarrinho[id].length > 1) {
@@ -88,7 +87,6 @@ class App extends React.Component {
     if (itensCarrinhoJSON) {
       const itensCarrinho = JSON.parse(itensCarrinhoJSON);
       const itensCarrinhoArray = Object.values(itensCarrinho);
-      // console.log(itensCarrinhoArray);
       itensCarrinhoArray.forEach((produto) => {
         count += produto.length;
       });

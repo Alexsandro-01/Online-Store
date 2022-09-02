@@ -9,7 +9,11 @@ class Header extends Component {
     const { quantItemsToCart } = this.props;
     return (
       <header>
-        <h1>Grupo 24</h1>
+        <h1>
+          <Link to="/">
+            Online Store
+          </Link>
+        </h1>
         <Link id="button-cart" to="/carrinho" data-testid="shopping-cart-button">
           <IoMdCart />
           <span data-testid="shopping-cart-size">
